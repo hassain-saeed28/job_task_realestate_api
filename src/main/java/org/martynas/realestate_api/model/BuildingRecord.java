@@ -29,7 +29,7 @@ public class BuildingRecord {
     private int sizeInSquareMetres;
 
     @Column(name = "market_value")
-    private int marketValue;
+    private double marketValue;
 
     //    @Enumerated(EnumType.STRING)
     //    @Column(name = "property_type")
