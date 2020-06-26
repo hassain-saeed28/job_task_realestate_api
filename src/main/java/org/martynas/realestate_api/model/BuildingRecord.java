@@ -1,9 +1,11 @@
 package org.martynas.realestate_api.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
+import org.martynas.realestate_api.annotation.PropertyTypeSubset;
+import org.martynas.realestate_api.annotation.ValueOfEnum;
 
 import javax.persistence.*;
+import javax.validation.constraints.*;
 
 @Data
 @Entity
@@ -16,27 +18,35 @@ public class BuildingRecord {
     @Column(name = "id")
     private Long id;
 
-    @OneToOne
+    @NotNull
+//        @OneToOne(cascade = {CascadeType.REMOVE, CascadeType.PERSIST})
+//    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = {CascadeType.REMOVE, CascadeType.PERSIST, CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH})
     @JoinColumn(name = "address_id", referencedColumnName = "id", nullable = false, unique = true)
     private Address address;
 
-    //    @JsonIgnore
-    @ManyToOne
+    @NotNull
+//    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+//    @ManyToOne(cascade = CascadeType.ALL)
+//    @ManyToOne(cascade = {CascadeType.REMOVE, CascadeType.DETACH})
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH})
     @JoinColumn(name = "owner_id", referencedColumnName = "id", nullable = false)
     private Owner owner;
 
+    @Positive
     @Column(name = "size_m2")
     private int sizeInSquareMetres;
 
+    @PositiveOrZero
     @Column(name = "market_value")
     private double marketValue;
 
-    //    @Enumerated(EnumType.STRING)
-    //    @Column(name = "property_type")
-    // TODO: should work with Char type if enum code is one symbol
-    //    @Column(name = "property_type", columnDefinition = "CHAR")
-    @Column(name = "property_type", columnDefinition = "VARCHAR(10)")
-    private PropertyType propertyType;
+//    @ValueOfEnum(enumClass = PropertyType.class)
+//    @Column(name = "property_type", columnDefinition = "CHAR")
+//    private String propertyType;
 
+    @PropertyTypeSubset(anyOf = {PropertyType.APARTMENT, PropertyType.HOUSE, PropertyType.INDUSTRIAL})
+    @Column(name = "property_type", columnDefinition = "CHAR")
+    private PropertyType propertyType;
 
 }

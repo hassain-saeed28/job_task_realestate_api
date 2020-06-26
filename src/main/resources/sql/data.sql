@@ -1,9 +1,9 @@
 insert into OWNERS (ID, EMAIL, JURIDICAL_PERSON, NAME, SURNAME)
-VALUES (1, 'harry.burgess@companyemail.com', true, 'Harry', 'Burgess');
+VALUES (1, 'harry.burgess@company42email.com', true, 'Harry', 'Burgess');
 insert into OWNERS (ID, EMAIL, JURIDICAL_PERSON, NAME, SURNAME)
-VALUES (2, 'sofia.wilkins@universalemail.com', false, 'Sofia', 'Wilkins');
+VALUES (2, 'sofia.wilkins@universal42email.com', false, 'Sofia', 'Wilkins');
 insert into OWNERS (ID, EMAIL, JURIDICAL_PERSON, NAME, SURNAME)
-VALUES (3, 'mason.bird@universalemail.com', false, 'Mason', 'Bird');
+VALUES (3, 'mason.bird@universal42email.com', false, 'Mason', 'Bird');
 
 insert into ADDRESS (ID, CITY, NUMBER, STREET)
 VALUES (1, 'London', 18, 'Guild Street');

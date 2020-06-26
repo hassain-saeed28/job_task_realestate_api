@@ -1,24 +1,24 @@
-create table OWNERS
-(
-    ID               BIGINT       not null primary key,
-    EMAIL            VARCHAR(255),
-    JURIDICAL_PERSON BOOLEAN      not null,
-    NAME             VARCHAR(255) not null,
-    SURNAME          VARCHAR(255) not null,
-    constraint UK_dw1w2xj1axp1le5oionrjfk7t unique (email)
-);
 create table ADDRESS
 (
     ID     BIGINT not null primary key,
-    CITY   VARCHAR(255),
-    NUMBER VARCHAR(255),
-    STREET VARCHAR(255)
+    CITY   VARCHAR(100),
+    NUMBER VARCHAR(5),
+    STREET VARCHAR(100)
+);
+create table OWNERS
+(
+    ID               BIGINT       not null primary key,
+    EMAIL            VARCHAR(50),
+    JURIDICAL_PERSON BOOLEAN      not null,
+    NAME             VARCHAR(50) not null,
+    SURNAME          VARCHAR(50) not null,
+    constraint UK_dw1w2xj1axp1le5oionrjfk7t unique (email)
 );
 create table BUILDING_RECORDS
 (
     ID            BIGINT not null primary key,
     MARKET_VALUE  DOUBLE,
-    PROPERTY_TYPE VARCHAR(10),
+    PROPERTY_TYPE CHAR,
     SIZE_M2       INTEGER,
     ADDRESS_ID    BIGINT not null,
     OWNER_ID      BIGINT not null,
@@ -28,3 +28,9 @@ create table BUILDING_RECORDS
     constraint FKrq28aa88ewy46imiwgmlo4ddn
         foreign key (ADDRESS_ID) references address
 );
+-- create sequence ADDRESS_SEQ;
+-- create sequence BUILDING_RECORD_SEQ;
+-- create sequence OWNER_SEQ;
+
+
+
