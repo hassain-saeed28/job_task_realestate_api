@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
-import javax.validation.ValidationException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
@@ -15,8 +14,7 @@ import java.util.Set;
 @RestControllerAdvice
 public class ConstraintViolationAdvice {
 
-//    @ExceptionHandler(ConstraintViolationException.class)
-    @ExceptionHandler(ValidationException.class)
+    @ExceptionHandler(ConstraintViolationException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     Map<String, Object> ConstraintViolationExceptionHandler(ConstraintViolationException ex) {
             Map<String, Object> response = new HashMap<>();

@@ -32,8 +32,7 @@ public class Owner {
 
     @Email
     @Length(min = MIN_LENGTH, max = MAX_LENGTH)
-    //    @Column(name = "email", unique = true)
-    @Column(name = "email", unique = false)
+    @Column(name = "email", unique = true)
     private String email;
 
     @NotNull

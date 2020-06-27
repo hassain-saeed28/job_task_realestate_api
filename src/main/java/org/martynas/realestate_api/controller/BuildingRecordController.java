@@ -28,37 +28,27 @@ public class BuildingRecordController {
         return this.buildingRecordService.getAllOrderById();
     }
 
-    // Get all building records by given owner id
+    // Get all building records by given owner id or throw owner not found exception
     @GetMapping("/properties/owner/{ownerId}")
     public Collection<BuildingRecord> getAllBuildingRecordsByOwnerId(@PathVariable Long ownerId) {
         return this.buildingRecordService.getAllByOwner(this.ownerService.findById(ownerId));
     }
 
-    // Get a building record by given id
+    // Get a building record by given id or throw record not found exception
     @GetMapping("/properties/{id}")
     public BuildingRecord getBuildingRecord(@PathVariable Long id) {
-        return this.buildingRecordService.getById(id);
+        return this.buildingRecordService.findById(id);
     }
 
-    // Create new building record and return it or validation error or not found exception
+    // Create new building record, save and return it or validation error or throw Owner not found Exception if existing owner id was passed
     @PostMapping(value = "/properties")
     public BuildingRecord createBuildingRecord(@RequestBody @Valid BuildingRecord buildingRecord, BindingResult bindingResult) {
-
-        System.err.println("bindingResult " + bindingResult);
-        System.err.println("buildingRecord " + buildingRecord);
-
-        // Persist new building record into database and return it
         return this.buildingRecordService.save(buildingRecord);
     }
 
-    // Update building record by given id and return it or validation error or not found exception
+    // Update building record by given id and return it or validation error or throw record/owner/address not found exception if existing owner/address id was passed
     @PutMapping("/properties/{id}")
     public BuildingRecord replaceBuildingRecord(@PathVariable Long id, @Valid @RequestBody BuildingRecord buildingRecord, BindingResult bindingResult) {
-
-        System.err.println("bindingResult " + bindingResult);
-        System.err.println("buildingRecord " + buildingRecord);
-
-        // Persist modified building record on database and return it
         return this.buildingRecordService.update(buildingRecord, id);
     }
 

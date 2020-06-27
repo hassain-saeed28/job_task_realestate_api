@@ -9,10 +9,9 @@ import javax.persistence.*;
 @Data
 @Entity
 @Table(
-        name = "address"
-//        ,
-//        uniqueConstraints =
-//        @UniqueConstraint(columnNames = {"city", "street", "number"})
+        name = "address",
+        uniqueConstraints =
+        @UniqueConstraint(columnNames = {"city", "street", "number"})
 )
 @SequenceGenerator(name = "address_seq_gen", sequenceName = "address_seq", initialValue = 10, allocationSize = 1)
 public class Address {

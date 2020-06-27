@@ -7,7 +7,7 @@ import java.util.Collection;
 
 public interface BuildingRecordService {
 
-    BuildingRecord getById(Long id);
+    BuildingRecord findById(Long id);
 
     Collection<BuildingRecord> getAllOrderById();
 

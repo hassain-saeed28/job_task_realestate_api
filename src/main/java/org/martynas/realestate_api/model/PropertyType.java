@@ -5,9 +5,9 @@ public enum PropertyType {
     HOUSE("H"),
     INDUSTRIAL("I");
 
-    private String code;
+    private final String code;
 
-    private PropertyType(String code) {
+    PropertyType(String code) {
         this.code = code;
     }
 

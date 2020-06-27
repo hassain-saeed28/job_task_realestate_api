@@ -1,4 +1,6 @@
-package org.martynas.realestate_api.model;
+package org.martynas.realestate_api.converter;
+
+import org.martynas.realestate_api.model.PropertyType;
 
 import javax.persistence.AttributeConverter;
 import javax.persistence.Converter;

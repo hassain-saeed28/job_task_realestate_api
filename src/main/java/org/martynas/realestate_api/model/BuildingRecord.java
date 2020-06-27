@@ -2,7 +2,6 @@ package org.martynas.realestate_api.model;
 
 import lombok.Data;
 import org.martynas.realestate_api.annotation.PropertyTypeSubset;
-import org.martynas.realestate_api.annotation.ValueOfEnum;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
@@ -19,16 +18,11 @@ public class BuildingRecord {
     private Long id;
 
     @NotNull
-//        @OneToOne(cascade = {CascadeType.REMOVE, CascadeType.PERSIST})
-//    @OneToOne(cascade = CascadeType.ALL)
     @OneToOne(cascade = {CascadeType.REMOVE, CascadeType.PERSIST, CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH})
     @JoinColumn(name = "address_id", referencedColumnName = "id", nullable = false, unique = true)
     private Address address;
 
     @NotNull
-//    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-//    @ManyToOne(cascade = CascadeType.ALL)
-//    @ManyToOne(cascade = {CascadeType.REMOVE, CascadeType.DETACH})
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH})
     @JoinColumn(name = "owner_id", referencedColumnName = "id", nullable = false)
     private Owner owner;

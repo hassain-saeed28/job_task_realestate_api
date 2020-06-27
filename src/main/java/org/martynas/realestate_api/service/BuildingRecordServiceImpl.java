@@ -1,14 +1,11 @@
 package org.martynas.realestate_api.service;
 
-import org.hibernate.exception.ConstraintViolationException;
 import org.martynas.realestate_api.exception.RecordNotFoundException;
 import org.martynas.realestate_api.model.Address;
 import org.martynas.realestate_api.model.BuildingRecord;
 import org.martynas.realestate_api.model.Owner;
 import org.martynas.realestate_api.repository.BuildingRecordRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
@@ -30,25 +27,23 @@ public class BuildingRecordServiceImpl implements BuildingRecordService {
     }
 
     @Override
-    public BuildingRecord getById(Long id) {
+    public BuildingRecord findById(Long id) {
         Optional<BuildingRecord> optionalRecord = buildingRecordRepository.findById(id);
         return optionalRecord.orElseThrow(() -> new RecordNotFoundException(id));
     }
 
     @Override
     public Collection<BuildingRecord> getAllOrderById() {
-        return buildingRecordRepository.findAllByOrderById();
+        return buildingRecordRepository.getAllByOrderById();
     }
 
     @Override
     public Collection<BuildingRecord> getAllByOwner(Owner owner) {
-        return buildingRecordRepository.findAllByOwnerOrderById(owner);
+        return buildingRecordRepository.getAllByOwnerOrderById(owner);
     }
 
     @Override
     public BuildingRecord save(BuildingRecord buildingRecord) {
-
-        System.err.println("SAVE buildingRecord " + buildingRecord);
 
         // Ignore record id to avoid editing with POST method
         buildingRecord.setId(null);
@@ -67,8 +62,6 @@ public class BuildingRecordServiceImpl implements BuildingRecordService {
 
     @Override
     public BuildingRecord update(BuildingRecord newRecord, Long id) {
-
-        System.err.println("UPDATE buildingRecord " + newRecord);
 
         // Try to find a record by given id
         Optional<BuildingRecord> datasourceOptRecord = buildingRecordRepository.findById(id);
@@ -99,6 +92,7 @@ public class BuildingRecordServiceImpl implements BuildingRecordService {
                     newRecord.setAddress(addressService.findById(newAddressId));
                 }
             }
+
             // Persist modified building record on datasource and return it
             return buildingRecordRepository.saveAndFlush(newRecord);
         } else {
