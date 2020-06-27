@@ -31,8 +31,15 @@ create table BUILDING_RECORDS
     constraint FKrq28aa88ewy46imiwgmlo4ddn
         foreign key (ADDRESS_ID) references address
 );
+create table PROPERTY_TAX
+(
+    ID            BIGINT not null primary key,
+    PROPERTY_TYPE CHAR,
+    TAX_RATE      DOUBLE
+);
 
 create sequence ADDRESS_SEQ start with 10 increment by 1;
 create sequence BUILDING_RECORD_SEQ start with 10 increment by 1;
 create sequence OWNER_SEQ start with 10 increment by 1;
+create sequence PROPERTY_TAX_SEQ start with 10 increment by 1;
 
