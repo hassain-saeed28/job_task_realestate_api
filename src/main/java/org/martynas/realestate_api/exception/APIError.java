@@ -13,7 +13,7 @@ import java.util.*;
 @Data
 public class APIError {
 
-    @Value("${spring.custom.api.version}")
+    @Value("${custom.api.version}")
     private String apiVersion = "0.1";
     private HttpStatus status;
     private final LocalDateTime timestamp;
@@ -33,61 +33,19 @@ public class APIError {
     }
 
     public APIError(HttpStatus status, String exMessage, String exType, List<String> detailsList, String path) {
-        this();
-        this.status = status;
-        this.path = path;
-        error.put("type", exType);
-        error.put("message", exMessage);
+        this(status, exMessage, exType, path);
         error.put("detail", detailsList);
     }
 
     public APIError(HttpStatus status, String exMessage, String exType, Map<String, Object> detailsMap, String path) {
-        this();
-        this.status = status;
-        this.path = path;
-        error.put("type", exType);
-        error.put("message", exMessage);
+        this(status, exMessage, exType, path);
         error.put("detail", detailsMap);
 
     }
 
-//    public ApiError(HttpStatus status, String message, Map<String, Object> errorsMap, String path) {
-//        this();
-//        this.status = status;
-//        this.message = message;
-//        this.errorsMap = errorsMap;
-//        this.path = path;
-//    }
-//
-//    public ApiError(HttpStatus status, String message, List<String> errors, String path) {
-//        this();
-//        this.status = status;
-//        this.message = message;
-//        this.errors = errors;
-//        this.path = path;
-//    }
-//
-//    public ApiError(HttpStatus status, String message, String error, String path) {
-//        this();
-//        this.status = status;
-//        this.message = message;
-//        this.errors = Collections.singletonList(error);
-//        this.path = path;
-//    }
-
+    // Overload HttpStatus getter with toString version for more verbose status format to include status code and phrase (404 NOT_FOUND)
     public String getStatus() {
         return status.toString();
     }
 
-//    public Object getErrors() {
-//        return errors == null ? errorsMap.entrySet() : errors;
-
-//        Map<String, String> errorMap = new HashMap<>();
-//        errors.put("reason", reason);
-//        errors.put("message", message);
-//        Map<String, Object> outsideMap = new HashMap<>();
-//        outsideMap.put("errors", errors);
-//        return errors;
-//        return Collections.singletonMap("errors", errors);
-//    }
 }
